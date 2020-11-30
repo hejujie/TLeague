@@ -10,7 +10,7 @@ python3 -m tleague.scripts.run_ppo_learner2 \
  --policy_config "{'use_xla': True, 'test': False, 'use_loss_type': 'rl', 'use_value_head': True, 'use_self_fed_heads': False, 'use_lstm': True, 'nlstm': 256, 'hs_len': 256*2, 'lstm_duration': 1, 'lstm_dropout_rate': 0.0, 'use_base_mask': True, 'lstm_cell_type': 'lstm', 'lstm_layer_norm': True, 'weight_decay': 0.00002, 'arg_scope_type': 'type_b', 'endpoints_verbosity': 10, 'n_v': 5, 'distillation': True, 'fix_all_embed': False, 'zstat_embed_version': 'v2'}" \
  --learner_config "{'vf_coef': 0.5, 'max_grad_norm': 1.0, 'distill_coef': [0.0005, 0.0005, 0.0002, 0.0002, 0.0002, 0.0004, 0.00067, 0.0003, 0.002, 0.00033, 0.0005], 'ent_coef': [0.00005, 0.00005, 0.00002, 0.00002, 0.00002, 0.00004, 0.000067, 0.00003, 0.0002, 0.000033, 0.00005],}" \
  --rwd_shape \
- --rollout_length 8 
+ --rollout_length 8
 
 # actor
 

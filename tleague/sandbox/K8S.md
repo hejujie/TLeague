@@ -5,7 +5,7 @@ Then, let's describe how to run it with k8s.
 ### docker
 See [the descriptions here](../build_docker/README.md) for building docker.
 
-### start all  
+### start all
 ```bash
 python render_template.py run_ppo_all.yml.jinja2 | kubectl create -f -
 ```

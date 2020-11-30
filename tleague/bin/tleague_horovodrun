@@ -395,7 +395,7 @@ def exclude_env_vars_old(env, exclude_pattern):
 
 def parse_args():
     override_args = set()
-    
+
     parser = argparse.ArgumentParser(description='Horovod Runner')
 
     parser.add_argument('-v', '--version', action='version', version=horovod.__version__,

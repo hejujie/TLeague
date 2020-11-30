@@ -1,2 +1,2 @@
-Sandbox for code, docs, etc. 
+Sandbox for code, docs, etc.
 Ignore it.

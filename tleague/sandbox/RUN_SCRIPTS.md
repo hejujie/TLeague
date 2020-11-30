@@ -5,18 +5,18 @@ Follow the steps below:
 ```bash
 pip install -e .
 ```
-(Almost) All `py` dependencies will be installed. 
+(Almost) All `py` dependencies will be installed.
 Note, we've intentionally omitted the following packages that you need manually install:
 ```bash
 tensorflow  # pip install tensorflow or tensorflow-gpu or cutomized *.whl
 arena  # internal package at this moment, use pip install -e .
-pysc2  # Use Tencent extension, use pip install -e . 
-``` 
+pysc2  # Use Tencent extension, use pip install -e .
+```
 
 * Install `gambit` (for calculating Nash Equilibrium) on the machine where `league_mgr` deploys.
 See the [link](https://gambitproject.readthedocs.io/en/latest/build.html#general-information) here.
-Note: currently only the binary is needed, 
-you don't have to install the `python` extension. 
+Note: currently only the binary is needed,
+you don't have to install the `python` extension.
 
 * Install the following binaries by `yum` or `apt-get` or `homebrew`:
 ```bash
@@ -43,7 +43,7 @@ CUDA_VISIBLE_DEVICES= python -m tleague.scripts.run_ppo_actor \
 # actor eval
 CUDA_VISIBLE_DEVICES= python -m tleague.scripts.run_ppo_actor_eval \
     --league_mgr_addr localhost:10005 \
-    --model_pool_addrs localhost:10003:10004 
+    --model_pool_addrs localhost:10003:10004
 
 # learner
 CUDA_VISIBLE_DEVICES=0 python -m tleague.scripts.run_ppo_learner \
@@ -63,7 +63,7 @@ CUDA_VISIBLE_DEVICES= python -m tleague.scripts.run_model_pool \
 
 ### Use a high-level frontend script
 Run the frontend script which calls other scricpts in tmux windows.
-For local machine, it simply runs the command. 
+For local machine, it simply runs the command.
 For remote machine, it performs connecting, copying the code and pip install before running the command.
 
 Example 1.
@@ -75,7 +75,7 @@ python -m tleague.scripts.run_ppo_all \
   --local_worker_pre_cmd "source /Users/pengsun/miniconda3/etc/profile.d/conda.sh && conda activate tlea && conda deactivate && conda activate tlea && "
 ```
 where the `clust_spec_example.csv` specifies only localhosts.
-Note: activating conda env seems problematic, 
+Note: activating conda env seems problematic,
 it only works by activating-deactivating several times,
 don't know why...
 
@@ -91,7 +91,7 @@ python -m tleague.scripts.run_ppo_all \
   --remote_worker_pre_cmd "source /home/work/tmp_pythonsun/venv/tlea/bin/activate && "
 ```
 see `../sandbox/clust_spec_example2.csv`.
-Use up to `n_process` parallel threads, 
+Use up to `n_process` parallel threads,
 i.e., connect to `n_process` machines (including localhost) simultaneously.
 
 Example 3. First prepare on remote, then run the real commands:
@@ -106,7 +106,7 @@ python -m tleague.scripts.prepare_all \
   -p /some/other/pac,/remote/pac
 ```
 The script copies self folder `TLeague` to remote and do `pip install -e .`.
-Then, for EACH of the package specified by `-p` args, 
+Then, for EACH of the package specified by `-p` args,
 it copies the local folder to remote folder (separated by comma) and to `pip install -e .`.
 
 Then run the real commands:
@@ -120,10 +120,10 @@ python -m tleague.scripts.run_ppo_all \
   --local_worker_pre_cmd "export http_proxy= && export https_proxy= && source /data1/pythonsun/venv/tlea/bin/activate && " \
   --remote_worker_pre_cmd "export http_proxy= && export https_proxy= && source /home/work/tmp_pythonsun/venv/tlea/bin/activate && "
 ```
-Note the `--noforce_overwrite_remote` arg, 
-as we've prepared everything in previous step. 
+Note the `--noforce_overwrite_remote` arg,
+as we've prepared everything in previous step.
 This agr saves you from doing unnecessary remote preparation when you run a new experiment
-, if you're sure the remote code needs no updating or re-installing. doesnt need any preparation. 
+, if you're sure the remote code needs no updating or re-installing. doesnt need any preparation.
 
 
 #### The CSV file format
@@ -133,7 +133,7 @@ Note: `cuda_visisble_devices` will be added as ENV VAR prefix to each python cal
 see `run_ppo_all.py`.
 
 Note: `run_ppo_actor` does not require a `port` for the actor itself.
-However, the frontend script requires a `port` for each actor (see the example CSV file) 
+However, the frontend script requires a `port` for each actor (see the example CSV file)
 to distinguish each actor (using `ip:port` as ID) when paring the actor-learner.
 
 #### Kill all processes & tmux session on each machine
@@ -156,9 +156,9 @@ python -m tleague.scripts.exec_cmd_remote --n_process 8 \
 NOTE: Use the quote " and the backslash \ to make the command intact.
 NOTE: it's extremely dangerous, for your own consideration!
 
-#### Convert c.oa CSV 
-Currently, the downloaded coa files are in `*.xlsx` format and can be more than one from a single order. 
-You can place all the `*.xlsx` files in a folder and do the converting: 
+#### Convert c.oa CSV
+Currently, the downloaded coa files are in `*.xlsx` format and can be more than one from a single order.
+You can place all the `*.xlsx` files in a folder and do the converting:
 ```bash
 export COA_FOLDER="coa_folder"
 ls ${COA_FOLDER}/*.xlsx | xargs ./xlsx2csv.py > ${COA_FOLDER}/all.csv
@@ -171,4 +171,3 @@ python3 -m tleague.scripts.convert_coa \
 ```
 where the `xlsx2csv` combines several `*.xlsx` files and outputs a single `*.csv` file.
 Then the convert_coa converts it to our clust_spec CSV.
-

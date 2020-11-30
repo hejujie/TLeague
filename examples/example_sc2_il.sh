@@ -111,4 +111,3 @@ python3 -m tleague.bin.run_replay_actor \
 # * Do not pass --infserver_addr=host:port when not using Inference Server
 # * --SC2_bin_root is used for Linux and is ignored for Darwin and Windows
 fi
- 

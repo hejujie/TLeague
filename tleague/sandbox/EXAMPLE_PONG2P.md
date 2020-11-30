@@ -37,7 +37,7 @@ python3 -m tleague.scripts.run_ppo_actor \
     --norwd_shape \
     --nodistillation \
     --version v2 \
-    --agent tleague.actors.agent.PPOAgent2 
+    --agent tleague.actors.agent.PPOAgent2
 
 # learner
 python -m tleague.scripts.run_ppo_learner2 \
@@ -63,4 +63,4 @@ python -m tleague.scripts.run_ppo_learner2 \
 
 Note:
 * `unroll_length` must be a multiple of `batch_size`. `unroll_length` means how long the trajectory is when computing the value using bootstrap.
-* `rollout_length` = `rollout_len` in the `policy_config`. 
+* `rollout_length` = `rollout_len` in the `policy_config`.
